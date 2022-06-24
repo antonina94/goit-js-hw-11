@@ -116,5 +116,6 @@ gallery.innerHTML = ''
 
 function lightbox(){
 const lightbox = new SimpleLightbox('.gallery a', {});
+lightbox.refresh()
 }
 
