@@ -10,16 +10,14 @@ export default class LoadMoreBtn {
     getRefs(selector) {
       const refs = {};
       refs.button = document.querySelector(selector);
-    //   refs.label = refs.button.querySelector('.label');
-    //   refs.spinner = refs.button.querySelector('.spinner');
+    
   
       return refs;
     }
   
     enable() {
       this.refs.button.disabled = false;
-    //   this.refs.label.textContent = 'Показать ещё';
-    //   this.refs.spinner.classList.add('is-hidden');
+    
     }
   
     disable() {
