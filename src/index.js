@@ -12,7 +12,6 @@ const form = document.querySelector('.search-form')
 const gallery = document.querySelector('.gallery')
 const button = document.querySelector('.load-more')
 
-// let per_page = 0
 
 
 const loadmorebtn = new LoadMoreBtn({selector:'[type=button]',
@@ -20,6 +19,12 @@ const loadmorebtn = new LoadMoreBtn({selector:'[type=button]',
 
 const newsPixabayService = new NewsPixabayService()
 console.log(newsPixabayService)
+
+console.log(newsPixabayService.per_page)
+let perpage = newsPixabayService.per_page
+let page = newsPixabayService.page
+console.log(page)
+console.log(perpage)
 
 
 form.addEventListener('submit', formSubmit)
@@ -49,17 +54,19 @@ try {
     console.log(response)
     loadmorebtn.enable()
     renderPixabay(hits)
-    if(totalHits < newsPixabayService.page){
+     perpage = Math.ceil(totalHits/40)
+     console.log(perpage)
+    if( newsPixabayService.page > perpage ){
       loadmorebtn.hide()
       Notify.info("We're sorry, but you've reached the end of search results.")
     }
-    
     if(hits.length === 0){
       loadmorebtn.hide()
-     return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+      Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     }
-    if(totalHits > newsPixabayService.page){
-      Notify.info(`Hooray! We found ${totalHits} images.`)
+    
+    if(hits.length !== 0){
+       Notify.success(`Hooray! We found ${totalHits} images.`)
     }
     lightbox()
   
@@ -74,9 +81,6 @@ getPixabay()
 }
 
 
-
-
-
 function renderPixabay( hits){
 const murkup = hits.map(card =>{
   return `
@@ -88,7 +92,7 @@ const murkup = hits.map(card =>{
     /></a>
   <div class='info'>
   <p class='info-item'>
-  <b>likes: ${card.likes}</b>
+  <b><span class= 'span'>likes:</span> ${card.likes}</b>
   </p>
   <p class="info-item">
     <b>views: ${card.views}</b>

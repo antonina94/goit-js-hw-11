@@ -11,6 +11,7 @@ export default class NewsPixabayService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.per_page = 40
   }
 
   async getPixabay() {
