@@ -1,6 +1,6 @@
 const axios = require('axios');
-PIXABAY_KEY = '28190532-07c65b576fc64781f10f94256'
-BASE_URL = 'https://pixabay.com/api/'
+PIXABAY_KEY = '28190532-07c65b576fc64781f10f94256';
+BASE_URL = 'https://pixabay.com/api/';
 const options = {
     headers: {
       Authorization: PIXABAY_KEY,
