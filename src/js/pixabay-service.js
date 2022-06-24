@@ -1,3 +1,4 @@
+const axios = require('axios');
 PIXABAY_KEY = '28190532-07c65b576fc64781f10f94256'
 BASE_URL = 'https://pixabay.com/api/'
 const options = {
@@ -6,12 +7,13 @@ const options = {
     },
   };
 
-  const axios = require('axios');
+
 
 export default class NewsPixabayService {
     constructor(){
         this.searchQuery = ''
         this.page = 1
+
     }
 
     
@@ -20,9 +22,9 @@ export default class NewsPixabayService {
           const url = `${BASE_URL}?key=${PIXABAY_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=${this.page}`
           const response = await axios.get(url);
           console.log(response);
-          const {hits,totalHits} = response.data
+          // const {hits,totalHits} = response.data
           this.page+=1
-          return {hits,totalHits}
+          return response
         } catch (error) {
           console.error(error);
         }

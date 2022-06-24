@@ -27,6 +27,7 @@ loadmorebtn.refs.button.addEventListener('click', onLoadMore)
 
 function formSubmit(event){
   event.preventDefault()
+
   clearGallery()
   newsPixabayService.query = event.target.elements.searchQuery.value
   loadmorebtn.show()
@@ -44,20 +45,21 @@ async function getPixabay(){
 loadmorebtn.disable()
 try {
     const response = await newsPixabayService.getPixabay()
+    const {hits,totalHits} = response.data
     console.log(response)
     loadmorebtn.enable()
-    renderPixabay(response.hits)
-    if(response.totalHits < newsPixabayService.page){
+    renderPixabay(hits)
+    if(totalHits < newsPixabayService.page){
       loadmorebtn.hide()
       Notify.info("We're sorry, but you've reached the end of search results.")
     }
     
-    if(response.hits.length === 0){
+    if(hits.length === 0){
       loadmorebtn.hide()
      return Notify.failure("Sorry, there are no images matching your search query. Please try again.")
     }
-    if(response.totalHits > newsPixabayService.page){
-      Notify.info(`Hooray! We found ${response.totalHits} images.`)
+    if(totalHits > newsPixabayService.page){
+      Notify.info(`Hooray! We found ${totalHits} images.`)
     }
     lightbox()
   
