@@ -61,7 +61,7 @@ try {
     }
     
     if(hits.length !== 0){
-       Notify.success(`Hooray! We found ${totalHits} images.`)
+       Notify.success(`Hooray! We found ${hits.length} images.`)
     }
     lightbox()
   
